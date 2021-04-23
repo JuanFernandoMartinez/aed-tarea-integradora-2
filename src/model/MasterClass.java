@@ -6,16 +6,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class MasterClass {
-    private NodeTree<Double,ArrayList<Long>> points;
-    private NodeTree<Integer,ArrayList<Long>> f;
+    private NodeTree<Double,ArrayList<Long>> ts;
+    private NodeTree<Double,ArrayList<Long>> ftr;
     private NodeTree<Integer,ArrayList<Long>> a;
     private NodeTree<Integer,ArrayList<Long>> l;
     private NodeTree<Integer,ArrayList<Long>> z;
     private File file;
 
     public MasterClass() {
-        points = new NodeTree<>();
-        f = new NodeTree<>();
+        ts = new NodeTree<>();
+        ftr = new NodeTree<>();
         a = new NodeTree<>();
         l = new NodeTree<>();
         z = new NodeTree<>();
@@ -35,10 +35,16 @@ public class MasterClass {
             temp = raf.readLine();
             cell = temp.split(",");
 
-            if(points.search(Double.parseDouble(cell[7])) == null){
-                points.add(Double.parseDouble(cell[7]), new ArrayList<Long>());
+            if(ts.search(Double.parseDouble(cell[8])) == null){
+                ts.add(Double.parseDouble(cell[8]), new ArrayList<Long>());
             }
-            points.search(Double.parseDouble(cell[7])).add(pos);
+            ts.search(Double.parseDouble(cell[8])).add(pos);
+
+            if(ftr.search(Double.parseDouble(cell[10])) == null){
+                ftr.add(Double.parseDouble(cell[10]), new ArrayList<Long>());
+            }
+            ftr.search(Double.parseDouble(cell[10])).add(pos);
+
 
         }while(temp != null);
 
@@ -48,5 +54,24 @@ public class MasterClass {
         raf.close();
 
 
+    }
+
+    public ArrayList<String> searchByts(double p) throws IOException {
+        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Long> position =  ts.search(p);
+
+        if (position.size() != 0){
+            RandomAccessFile raf = new RandomAccessFile(file, "r");
+
+            for (int i = 0; i < position.size(); i++) {
+                raf.seek(position.get(i));
+                result.add(raf.readLine());
+                raf.seek(0);
+
+            }
+            raf.close();
+        }
+
+        return result;
     }
 }
