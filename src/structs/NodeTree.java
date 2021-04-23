@@ -10,11 +10,10 @@ public class NodeTree<K extends Comparable<K>,V> {
 	private NodeTree<K,V> parent;
 	
 	
-	public NodeTree(K k, V v) {
-		key = k;
-		value = v;
+	public NodeTree() {
+
 	}
-	
+
 	public boolean add(K k, V v) throws RepeatedElementException
 	{
 		if (k.compareTo(key) == 0)
@@ -24,7 +23,7 @@ public class NodeTree<K extends Comparable<K>,V> {
 		{
 			if (left == null)
 			{
-				left = new NodeTree<K, V>(k, v);
+				left = new NodeTree<K, V>();
 				left.setParent(this);
 				return true;
 			}else
@@ -35,7 +34,7 @@ public class NodeTree<K extends Comparable<K>,V> {
 		{
 			if (right == null)
 			{
-				right = new NodeTree<K, V>(k, v);
+				right = new NodeTree<K, V>();
 				right.setParent(this);
 				return true;
 			}else

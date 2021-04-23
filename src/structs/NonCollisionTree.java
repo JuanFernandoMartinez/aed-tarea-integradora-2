@@ -12,7 +12,7 @@ public abstract class NonCollisionTree<K extends Comparable<K>,V> implements BST
 	public boolean add(K k, V v) throws RepeatedElementException {
 		if (root == null)
 		{
-			root = new NodeTree<K, V>(k, v);
+			root = new NodeTree<K, V>();
 			return true;
 		}else
 		{
