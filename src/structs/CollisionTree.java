@@ -1,5 +1,7 @@
 package structs;
 
+import exceptions.NotFoundNodeException;
+
 public abstract class CollisionTree<K extends Comparable<K>,V> implements BSTInterface<K, V> {
 	
 	private LinkedList<K, V> root;
@@ -9,10 +11,13 @@ public abstract class CollisionTree<K extends Comparable<K>,V> implements BSTInt
 		if (root == null)
 		{
 			root = new LinkedList<>(k, v);
+			balanceTree();
 			return true;
 		}else
 		{
-			return root.add(k, v);
+			boolean status = root.add(k, v);
+			balanceTree();
+			return status;
 		}
 		
 	}
@@ -41,19 +46,49 @@ public abstract class CollisionTree<K extends Comparable<K>,V> implements BSTInt
 	}
 
 	@Override
-	public boolean remove(K k) {
-		LinkedList<K, V> aux = searchList(k);
-		
-		if (aux == null)
+	public boolean remove(K k) throws NotFoundNodeException{
+		if (root == null) return false;
+		else
 		{
-			return false;
-		}else
-		{
-			aux.remove();
-			return true;
+			if (root.getKey().compareTo(k)==0)
+			{
+				LinkedList<K, V> aux = root.successor();
+				if (aux.getParent().getLeft() == aux) aux.getParent().setLeft(null);
+				else aux.getParent().setRight(null);
+				
+				aux.setLeft(root.getLeft());
+				aux.getLeft().setParent(aux);
+				
+				aux.setRight(root.getRight());
+				aux.getRight().setParent(aux);
+				
+				root = aux;
+				balanceTree();
+				return true;
+			}else
+			{
+				LinkedList<K, V> aux = root.search(k);
+				if(aux == null) throw new NotFoundNodeException();
+				else
+				{
+					boolean status =  aux.remove();
+					balanceTree();
+					return status;
+				}
+			}
 		}
 		
 	}
+
+	public LinkedList<K, V> getRoot() {
+		return root;
+	}
+
+	public void setRoot(LinkedList<K, V> root) {
+		this.root = root;
+	}
+	
+	public abstract void balanceTree();
 	
 	
 	

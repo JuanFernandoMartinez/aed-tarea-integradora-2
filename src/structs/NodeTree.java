@@ -63,6 +63,22 @@ public class NodeTree<K extends Comparable<K>,V> {
 		}
 	}
 	
+	public NodeTree<K, V> searchNode(K k)
+	{
+		if (k.compareTo(key) == 0)
+		{
+			return this;
+		}else if (k.compareTo(key)>0)
+		{
+			if (right == null) return null;
+			return right.searchNode(k);
+		}else
+		{
+			if (left == null) return null;
+			return left.searchNode(k);
+		}
+	}
+	
 	
 	
 	public NodeTree<K, V> successor()
@@ -74,7 +90,35 @@ public class NodeTree<K extends Comparable<K>,V> {
 	public boolean remove()
 	{
 		NodeTree<K, V> aux = successor();
-		
+		if (aux == aux.parent.left) aux.parent.setLeft(null);
+		else aux.parent.setRight(null);
+		aux.left = left;
+		aux.right = right;
+		if (left != null) left.setParent(aux);
+		if (right != null) right.setParent(aux);
+		return true;
+	}
+
+	
+	public int calculateWeight()
+	{
+		if (left == null && right == null)
+		{
+			return 1;
+		}else
+		{
+			int l;
+			int r;
+			if (left == null) l = 0;
+			else l = left.calculateWeight();
+			
+			if (right == null) r = 0;
+			else r = right.calculateWeight();
+			
+			
+			if (l>r) return l+1;
+			else return r+1;
+		}
 	}
 
 	public K getKey() {

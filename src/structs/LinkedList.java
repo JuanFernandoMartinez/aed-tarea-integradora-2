@@ -88,17 +88,22 @@ public class LinkedList<K extends Comparable<K>,V> implements ListInterface<K, V
 	public boolean remove()
 	{
 		LinkedList<K, V> aux = right.successor();
+		if (aux == aux.parent.left) aux.parent.setLeft(null);
+		else aux.parent.setRight(null);
 		aux.setLeft(left);
 		left.setParent(aux);
 		aux.setRight(right);
 		right.setParent(aux);
 		
-		if (parent.left == this)
+		if (parent != null)
 		{
-			parent.setLeft(aux);
-		}else
-		{
-			parent.setRight(aux);
+			if (parent.left == this)
+			{
+				parent.setLeft(aux);
+			}else
+			{
+				parent.setRight(aux);
+			}
 		}
 		return true;
 	}
@@ -158,6 +163,27 @@ public class LinkedList<K extends Comparable<K>,V> implements ListInterface<K, V
 		if(key.compareTo(o.key)>0) return 1;
 		else if (key.compareTo(o.key)<0)return -1;
 		return 0;
+	}
+	
+	public int calculateWeight()
+	{
+		if (left == null && right == null)
+		{
+			return 1;
+		}else
+		{
+			int l;
+			int r;
+			if (left == null) l = 0;
+			else l = left.calculateWeight();
+			
+			if (right == null) r = 0;
+			else r = right.calculateWeight();
+			
+			
+			if (l>r) return l+1;
+			else return r+1;
+		}
 	}
 
 
