@@ -7,13 +7,158 @@ public class Node<K extends Comparable<K>,V> {
 	private Node<K,V> parent,left,right;
 	private K key;
 	private ArrayList<V> values;
+	private int BalanceFactor;
+	private boolean isAVL;
 	
 	public Node(K k, V v) {
 		values = new ArrayList<>();
 		key = k;
 		values.add(v);
+		BalanceFactor = 0;
+		isAVL = false;
 	}
+	
+	public Node(K k, V v, boolean a) {
+		values = new ArrayList<>();
+		key = k;
+		values.add(v);
+		BalanceFactor = 0;
+		isAVL = a;
+	}
+	
+	public int calculateBalance()
+	{
+		int l,r;
+		
+		if (left == null) l = 0;
+		else l = left.calculateWeight();
+		if (right == null) r = 0;
+		else r = right.calculateWeight();
+		
+		
+		
+		return r-l;
+		
+	}
+	
+	public void leftRotate()
+	{
+		if (parent != null)
+		{
+			if (parent.left == this)
+			{
+				parent.setLeft(right);
+				right.setParent(parent);
+				
+				Node<K,V> aux = right.left;
+				
+				right.setLeft(this);
+				parent = right;
+				
+				right = aux;
+				if (aux != null)aux.parent = this;
+			}else
+			{
+				parent.right = right;
+				right.setParent(parent);
+				
+				Node<K,V> aux = right.left;
+				
+				right.setLeft(this);
+				parent = right;
+				
+				right = aux;
+				if (aux != null)aux.parent = this;
+			}
+		}else
+		{
+			right.setParent(parent);
+			
+			Node<K,V> aux = right.left;
+			
+			right.setLeft(this);
+			parent = right;
+			
+			right = aux;
+			if (aux != null)aux.parent = this;
 
+		}
+		
+	}
+	
+	
+	public void rightRotate()
+	{
+		if (parent != null)
+		{
+			if (parent.left == this)
+			{
+				parent.left = left;
+				left.setParent(parent);
+				
+				Node<K,V> aux = left.right;
+				
+				left.setRight(this);
+				parent = right;
+				
+				right = aux;
+				if (aux != null)aux.parent = this;
+			}else
+			{
+				parent.right = left;
+				left.setParent(parent);
+				
+				Node<K,V> aux = left.right;
+				
+				left.setRight(this);
+				parent = right;
+				
+				right = aux;
+				if (aux != null)aux.parent = this;
+				
+			}
+		}else
+		{
+			left.setParent(parent);
+			
+			Node<K,V> aux = left.right;
+			
+			left.setRight(this);
+			parent = right;
+			
+			right = aux;
+			
+			if (aux != null)aux.parent = this;
+			
+		}
+		
+	}
+	
+	public void balance()
+	{
+		if (calculateBalance() > 1)
+		{
+			if (right.right == null)
+			{
+				right.leftRotate();
+				leftRotate();
+			}else
+			{
+				leftRotate();
+			}
+		}else if (calculateBalance() < -1)
+		{
+			if (left.left == null)
+			{
+				left.rightRotate();
+				rightRotate();
+			}else 
+			{
+				rightRotate();
+			}
+		}
+	}
+	
 	
 	public boolean add(K k ,V v)
 	{
@@ -27,23 +172,34 @@ public class Node<K extends Comparable<K>,V> {
 			{
 				if (right == null) 
 				{
-					right = new Node<K,V>(k,v);
+					if (isAVL)
+					{
+						right = new Node<K,V>(k,v,true);
+					}else right = new Node<K,V>(k,v);
+					
 					right.setParent(this);
+					if (isAVL) balance();
 					return true;
 				}else
 				{
-					return right.add(k, v);
+					boolean status =  right.add(k, v);
+					if (status)if (isAVL) balance();
+					return status;
 				}
 			}else
 			{
 				if (left == null)
 				{
-					left = new Node<K,V>(k,v);
+					if (isAVL) left = new Node<K,V>(k,v,true);
+					else left = new Node<K,V>(k,v);
 					left.setParent(this);
+					if (isAVL) balance();
 					return true;
 				}else
 				{
-					return left.add(k, v);
+					boolean status = left.add(k, v);
+					if(status) if (isAVL) balance();
+					return status;
 				}
 			}
 		}
@@ -54,17 +210,27 @@ public class Node<K extends Comparable<K>,V> {
 	{
 		if (k.compareTo(key) == 0)
 		{
-			return remove();
+			boolean status =  remove();
+			if (status) if (isAVL) balance();
+			return status;
 		}else
 		{
 			if (key.compareTo(k) < 0)
 			{
 				if (right == null) return false;
-				else return right.remove(k);
+				else {
+					boolean status = right.remove(k);
+					if (status)if (isAVL) balance();
+					return status;
+				}
 			}else
 			{
 				if (left == null) return false;
-				else return left.remove(k);
+				else {
+					boolean status =  left.remove(k);
+					if (status) if (isAVL) balance();
+					return status;
+				}
 			}
 		}
 	}
@@ -190,10 +356,20 @@ public class Node<K extends Comparable<K>,V> {
 	public K getKey() {
 		return key;
 	}
-
+	
 
 	public void setKey(K key) {
 		this.key = key;
+	}
+
+
+	public int getBalanceFactor() {
+		return BalanceFactor;
+	}
+
+
+	public void setBalanceFactor(int balanceFactor) {
+		BalanceFactor = balanceFactor;
 	}
 	
 	
