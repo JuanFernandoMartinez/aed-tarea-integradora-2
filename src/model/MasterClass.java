@@ -8,17 +8,17 @@ import java.util.ArrayList;
 public class MasterClass {
     private NodeTree<Double,ArrayList<Long>> ts;
     private NodeTree<Double,ArrayList<Long>> ftr;
-    private NodeTree<Integer,ArrayList<Long>> a;
-    private NodeTree<Integer,ArrayList<Long>> l;
-    private NodeTree<Integer,ArrayList<Long>> z;
+    private NodeTree<Double,ArrayList<Long>> trb;
+    private NodeTree<Double,ArrayList<Long>> orb;
+    private NodeTree<Double,ArrayList<Long>> blk;
     private File file;
 
     public MasterClass() {
         ts = new NodeTree<>();
         ftr = new NodeTree<>();
-        a = new NodeTree<>();
-        l = new NodeTree<>();
-        z = new NodeTree<>();
+        trb = new NodeTree<>();
+        orb = new NodeTree<>();
+        blk = new NodeTree<>();
     }
 
     public void readFiles(File file) throws IOException, RepeatedElementException {
@@ -44,6 +44,21 @@ public class MasterClass {
                 ftr.add(Double.parseDouble(cell[10]), new ArrayList<Long>());
             }
             ftr.search(Double.parseDouble(cell[10])).add(pos);
+
+            if(trb.search(Double.parseDouble(cell[13])) == null){
+                trb.add(Double.parseDouble(cell[13]), new ArrayList<Long>());
+            }
+            trb.search(Double.parseDouble(cell[13])).add(pos);
+
+            if(orb.search(Double.parseDouble(cell[11])) == null){
+                orb.add(Double.parseDouble(cell[11]), new ArrayList<Long>());
+            }
+            orb.search(Double.parseDouble(cell[11])).add(pos);
+
+            if(blk.search(Double.parseDouble(cell[16])) == null){
+                blk.add(Double.parseDouble(cell[16]), new ArrayList<Long>());
+            }
+            blk.search(Double.parseDouble(cell[16])).add(pos);
 
 
         }while(temp != null);
