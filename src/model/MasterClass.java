@@ -14,6 +14,7 @@ public class MasterClass {
     private AVL<Double,ArrayList<Long>> orb;
     private BST<Double,ArrayList<Long>> blk;
     private File file;
+    private String[] cell;
 
     public MasterClass() {
         ts = new AVL<>();
@@ -31,8 +32,6 @@ public class MasterClass {
 
         long pos = raf.getFilePointer();
         String temp = raf.readLine();
-
-        String[] cell;
 
         do {
 
@@ -199,6 +198,18 @@ public class MasterClass {
         }
 
         return result;
+    }
+
+    public void exportData(String fileName) throws IOException {
+        ArrayList<String> result = new ArrayList<String>();
+        PrintWriter pw = new PrintWriter(fileName);
+        RandomAccessFile raf = new RandomAccessFile(file, "r");
+        for (int i = 0; i < cell.length; i++) {
+            result.add(raf.readLine());
+            pw.println(result);
+
+        }
+        pw.close();
     }
 
 
