@@ -3,21 +3,23 @@ import exceptions.RepeatedElementException;
 
 import java.io.*;
 import java.util.ArrayList;
+
+import structs.AVL;
 import structs.BST;
 
 public class MasterClass {
-    private BST<Double,ArrayList<Long>> ts;
-    private BST<Double,ArrayList<Long>> ftr;
-    private BST<Double,ArrayList<Long>> trb;
-    private BST<Double,ArrayList<Long>> orb;
+    private AVL<Double,ArrayList<Long>> ts;
+    private AVL<Double,ArrayList<Long>> ftr;
+    private AVL<Double,ArrayList<Long>> trb;
+    private AVL<Double,ArrayList<Long>> orb;
     private BST<Double,ArrayList<Long>> blk;
     private File file;
 
     public MasterClass() {
-        ts = new BST<>();
-        ftr = new BST<>();
-        trb = new BST<>();
-        orb = new BST<>();
+        ts = new AVL<>();
+        ftr = new AVL<>();
+        trb = new AVL<>();
+        orb = new AVL<>();
         blk = new BST<>();
     }
 
@@ -108,6 +110,44 @@ public class MasterClass {
         ArrayList<String> result = new ArrayList<String>();
 
         ArrayList<Long> position = ts.search(p);
+
+        if (position.size() != 0) {
+            RandomAccessFile raf = new RandomAccessFile(file, "r");
+
+            for (int i = 0; i < position.size(); i++) {
+                raf.seek(position.get(i));
+                result.add(raf.readLine());
+
+            }
+            raf.close();
+        }
+
+        return result;
+    }
+
+    public ArrayList<String> searchByftr(double p) throws IOException {
+        ArrayList<String> result = new ArrayList<String>();
+
+        ArrayList<Long> position = ftr.search(p);
+
+        if (position.size() != 0) {
+            RandomAccessFile raf = new RandomAccessFile(file, "r");
+
+            for (int i = 0; i < position.size(); i++) {
+                raf.seek(position.get(i));
+                result.add(raf.readLine());
+
+            }
+            raf.close();
+        }
+
+        return result;
+    }
+
+    public ArrayList<String> searchBytrb(double p) throws IOException {
+        ArrayList<String> result = new ArrayList<String>();
+
+        ArrayList<Long> position = trb.search(p);
 
         if (position.size() != 0) {
             RandomAccessFile raf = new RandomAccessFile(file, "r");
