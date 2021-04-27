@@ -13,11 +13,11 @@ public class Main extends Application {
 		// TODO Auto-generated method stub
 		try {
 			GUIController gui = new GUIController();
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FilesFXML/ContainerFXML.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FilesFXML/ContainerBorderPane.fxml"));
 			fxmlLoader.setController(gui);
 			Parent root = fxmlLoader.load();
 			Scene scene = new Scene(root,1280,800);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			primaryStage.centerOnScreen();
