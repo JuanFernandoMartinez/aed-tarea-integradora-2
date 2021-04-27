@@ -163,5 +163,43 @@ public class MasterClass {
         return result;
     }
 
+    public ArrayList<String> searchByorb(double p) throws IOException {
+        ArrayList<String> result = new ArrayList<String>();
+
+        ArrayList<Long> position = orb.search(p);
+
+        if (position.size() != 0) {
+            RandomAccessFile raf = new RandomAccessFile(file, "r");
+
+            for (int i = 0; i < position.size(); i++) {
+                raf.seek(position.get(i));
+                result.add(raf.readLine());
+
+            }
+            raf.close();
+        }
+
+        return result;
+    }
+
+    public ArrayList<String> searchByblk(double p) throws IOException {
+        ArrayList<String> result = new ArrayList<String>();
+
+        ArrayList<Long> position = blk.search(p);
+
+        if (position.size() != 0) {
+            RandomAccessFile raf = new RandomAccessFile(file, "r");
+
+            for (int i = 0; i < position.size(); i++) {
+                raf.seek(position.get(i));
+                result.add(raf.readLine());
+
+            }
+            raf.close();
+        }
+
+        return result;
+    }
+
 
 }
