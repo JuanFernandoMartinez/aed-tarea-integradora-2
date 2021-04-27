@@ -7,13 +7,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	
+	private GUIController gui;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			GUIController gui = new GUIController();
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FilesFXML/ContainerBorderPane.fxml"));
+			gui = new GUIController();
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLFiles/ContainerBorderPane.fxml"));
 			fxmlLoader.setController(gui);
 			Parent root = fxmlLoader.load();
 			Scene scene = new Scene(root,1280,800);
