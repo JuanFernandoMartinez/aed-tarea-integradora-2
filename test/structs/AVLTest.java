@@ -35,25 +35,23 @@ class AVLTest {
 	public void testRemove()
 	{
 		setup1();
-		a.add(10, 20);
-		a.add(11, 20);
-		a.add(12, 20);
-		a.add(13, 20);
+		a.add(10, null);
+		a.add(5, null);
+		a.add(6, null);
+		a.add(3, null);
+		a.add(4, null);
+		a.add(7, null);
+		a.add(15, 7);
+		a.add(12, null);
+		a.add(17, null);
+		a.add(16, null);
 		
-		a.remove(11);
 		
-		assertEquals(3,a.size());
-		assertEquals(12,a.getRoot().getKey());
+		assertEquals(10,a.size());
+		assertEquals(7,a.search(15));
 		
-		setup1();
-		a.add(10, 20);
-		a.add(11, 20);
-		a.add(12, 20);
-		a.add(13, 20);
-		
-		a.remove(12);
-		
-		assertEquals(13, a.getRoot().getRight().getKey());
+		a.remove(15);
+		assertEquals(null,a.search(15));
 		
 	}
 	

@@ -265,10 +265,16 @@ public class RedBlackTree<K extends Comparable<K>,V> implements RedBlackInterfac
 	
 
 	@Override
-	public void remove(K k) {
-		
-		
-		
+	public boolean remove(K k) {
+		RedBlackNode<K, V> a = search(k);
+		if (a == null)
+		{
+			return false;
+		}else
+		{
+			remove(a);
+			return true;
+		}
 	}
 	
 	
@@ -489,6 +495,42 @@ public class RedBlackTree<K extends Comparable<K>,V> implements RedBlackInterfac
 		
 	}
 	
+	public V searchValue(K key)
+	{
+		RedBlackNode<K, V> a = search(key);
+		if (a == null)
+		{
+			return null;
+		}else
+		{
+			return a.getValue();
+		}
+	}
+	
+	public boolean keyExists(K k)
+	{
+		if (search(k) == null)
+		{
+			return false;
+		}else
+		{
+			return true;
+		}
+	}
+	
+	/*public boolean removeElement(K key)
+	{
+		RedBlackNode<K, V> a = search(key);
+		if (a == null)
+		{
+			return false;
+		}else
+		{
+			remove(key);
+			return true;
+		}
+	}*/
+	
 	
 	private boolean isNil(RedBlackNode<K,V> node){
 		return node == nil;
@@ -571,7 +613,27 @@ public class RedBlackTree<K extends Comparable<K>,V> implements RedBlackInterfac
 	public int size(){
 
 		
-		return root.getNumLeft() + root.getNumRight() + 1;
+		if (!isNil(root))
+		{
+			return root.getNumLeft()+root.getNumRight()+1;
+		}else
+		{
+			return 0;
+		}
 	}
+
+
+
+	public RedBlackNode<K, V> getRoot() {
+		return root;
+	}
+
+
+
+	public void setRoot(RedBlackNode<K, V> root) {
+		this.root = root;
+	}
+	
+	
 
 }

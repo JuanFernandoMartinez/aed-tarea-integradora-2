@@ -250,7 +250,7 @@ public class AVLNode<K extends Comparable<K>,V> {
 			return a;
 		}else
 		{
-			AVLNode<K,V> a =  catchMinChild();
+			AVLNode<K,V> a =  left.catchMinChild();
 			if (left == null) lWeight = 0;
 			else lWeight = left.weight;
 			if (right == null) rWeight = 0;
