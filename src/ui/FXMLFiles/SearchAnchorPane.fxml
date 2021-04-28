@@ -21,15 +21,15 @@
                </VBox.margin></Label>
             <HBox alignment="CENTER" fillHeight="false" spacing="30.0">
                <children>
-                  <TextField prefWidth="275.0" promptText="Type Something..." />
-                  <ComboBox fx:id="sortingComboBox" prefWidth="175.0" promptText="Standard" />
-                  <Button mnemonicParsing="false" text="Search" />
+                  <TextField fx:id="searchTextField" focusTraversable="false" prefWidth="275.0" promptText="Type Something..." />
+                  <ComboBox fx:id="sortingComboBox" focusTraversable="false" prefWidth="175.0" promptText="Standard" />
+                  <Button disable="true" mnemonicParsing="false" text="Search" />
                </children>
                <VBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </VBox.margin>
             </HBox>
-            <TableView maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0">
+            <TableView focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0">
                <columns>
                   <TableColumn editable="false" prefWidth="187.0" sortable="false" text="Name" />
                   <TableColumn editable="false" prefWidth="63.0" sortable="false" text="Age" />

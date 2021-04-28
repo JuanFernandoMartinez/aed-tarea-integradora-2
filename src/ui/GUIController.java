@@ -3,6 +3,8 @@ package ui;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,13 +33,16 @@ public class GUIController {
 	@FXML
 	private TextField labelURL;
 
+	@FXML
+	private TextField searchTextField;
+
+
+
 	private FileChooser fileChooser;
 
 	private File file;
 
 	private MasterClass masterClass;
-
-
 
 	public GUIController() {
 		masterClass = new MasterClass();
@@ -76,7 +81,7 @@ public class GUIController {
 		BorderPane pane = fxmlLoader.load();
 
 		mainPanel.setCenter(pane);
-		
+
 
 		sortingComboBox.getItems().add("Total Rebounds");
 		sortingComboBox.getItems().add("Offensive Rebounds");
@@ -101,6 +106,43 @@ public class GUIController {
 
 	public void addElement(ActionEvent event) {
 
+	}
+
+	public void search(ActionEvent event) {
+
+		String value = searchTextField.getText();
+
+		switch (sortingComboBox.getSelectionModel().getSelectedItem()) {
+		case "Total Rebounds":
+			try {
+				masterClass.searchBytrb(Double.parseDouble(value));
+			} catch (NumberFormatException e) {
+				JOptionPane.showInternalMessageDialog(null, "Input a valid value", "Invalid Value", JOptionPane.PLAIN_MESSAGE, null);;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case "Offensive Rebounds":
+			break;
+		case "Blocks":
+			break;
+		case "True Shooting %":
+			break;
+		case "Free Throw %":
+			break;
+
+		}
+
+
+	}
+
+	public void selectedSearchStandard(ActionEvent event) {
+
+	}
+
+	public void endProgram(ActionEvent event) {
+		System.exit(0);
 	}
 
 }

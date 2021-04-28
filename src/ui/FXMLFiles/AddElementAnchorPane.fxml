@@ -20,49 +20,49 @@
             <HBox alignment="CENTER" spacing="20.0">
                <children>
                   <Label prefWidth="200.0" text="Name" />
-                  <TextField focusTraversable="false" prefWidth="200.0" promptText="LeBron James" />
+                  <TextField fx:id="nameTextField" focusTraversable="false" prefWidth="200.0" promptText="Kareem Abdul-Jabbar" />
                </children>
             </HBox>
             <HBox alignment="CENTER" spacing="20.0">
                <children>
                   <Label prefWidth="200.0" text="Age" />
-                  <TextField prefWidth="200.0" promptText="36" />
+                  <TextField fx:id="ageTextField" focusTraversable="false" prefWidth="200.0" promptText="30" />
                </children>
             </HBox>
             <HBox alignment="CENTER" spacing="20.0">
                <children>
                   <Label prefWidth="200.0" text="Team" />
-                  <TextField prefWidth="200.0" promptText="L.A. Lakers" />
+                  <TextField fx:id="teamTextField" focusTraversable="false" prefWidth="200.0" promptText="LAL" />
                </children>
             </HBox>
             <HBox alignment="CENTER" spacing="20.0">
                <children>
                   <Label prefWidth="200.0" text="Total Rebounds" />
-                  <TextField prefWidth="200.0" />
+                  <TextField fx:id="totalReboundTextField" focusTraversable="false" prefWidth="200.0" promptText="183" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="164.0" spacing="20.0">
                <children>
                   <Label prefWidth="200.0" text="Offensive Rebounds" />
-                  <TextField prefWidth="200.0" />
+                  <TextField fx:id="offensiveReboundsTextField" focusTraversable="false" prefWidth="200.0" promptText="87" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="131.0" spacing="20.0">
                <children>
                   <Label prefWidth="200.0" text="Blocks" />
-                  <TextField prefWidth="200.0" />
+                  <TextField fx:id="blockTextField" focusTraversable="false" prefWidth="200.0" promptText="41" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="131.0" spacing="20.0">
                <children>
                   <Label prefWidth="200.0" text="True Shooting Percentage" />
-                  <TextField prefWidth="200.0" />
+                  <TextField fx:id="trueShootingTextField" focusTraversable="false" prefWidth="200.0" promptText="589" />
                </children>
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="164.0" spacing="20.0">
                <children>
                   <Label prefWidth="200.0" text="Free Throw Percentage" />
-                  <TextField prefWidth="200.0" />
+                  <TextField fx:id="freeThrowTextField" focusTraversable="false" prefWidth="200.0" promptText="29" />
                </children>
             </HBox>
             <Button mnemonicParsing="false" text="Add">

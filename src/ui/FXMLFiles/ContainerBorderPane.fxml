@@ -16,7 +16,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#openAddAnElement" text="Add an element" />
                   <MenuItem mnemonicParsing="false" onAction="#openSearchElement" text="Search an Element" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#endProgram" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Settings">
