@@ -226,8 +226,26 @@ public class AVLNode<K extends Comparable<K>,V> {
 		if (left == null)
 		{
 			AVLNode<K,V> a = this;
-			if (parent.left == this) parent.left = null;
-			else parent.right = null;
+			if (parent.left == this) 
+			{
+				if (right != null) 
+				{
+					parent.left = right;
+					right = null;
+				}
+				else parent.left = null;
+			}
+			else
+			{
+				if (right != null)
+				{
+					parent.right = right;
+					right = null;
+				}else
+				{
+					parent.right = right;
+				}
+			}
 			
 			return a;
 		}else
