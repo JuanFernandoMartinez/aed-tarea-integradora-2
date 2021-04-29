@@ -137,7 +137,7 @@ public class MasterClass {
         	break;
         }
 
-        if (position.size() != 0) {
+        if (position != null) {
             RandomAccessFile raf = new RandomAccessFile(file, "r");
 
             for (int i = 0; i < position.size(); i++) {

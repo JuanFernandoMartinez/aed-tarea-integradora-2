@@ -44,7 +44,7 @@
                   <TableColumn fx:id="offensiveReboundsColumn" editable="false" prefWidth="75.0" sortable="false" text="Offensive Rebounds" />
                   <TableColumn fx:id="blocksColumn" editable="false" prefWidth="75.0" sortable="false" text="Blocks" />
                   <TableColumn fx:id="trueShootingColumn" editable="false" prefWidth="75.0" sortable="false" text="True Shooting %" />
-                  <TableColumn fx:id="freeThrowColumn" editable="false" prefWidth="75.0" sortable="false" text="Free Throw %" />
+                  <TableColumn fx:id="freeThrowColumn" editable="false" prefWidth="75.0" sortable="false" text="Free Throw" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
