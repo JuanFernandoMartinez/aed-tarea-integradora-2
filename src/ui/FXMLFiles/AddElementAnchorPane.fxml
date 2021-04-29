@@ -12,7 +12,7 @@
    <center>
       <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Add an element">
+            <Label styleClass="title" text="Add an element">
                <VBox.margin>
                   <Insets bottom="70.0" />
                </VBox.margin>

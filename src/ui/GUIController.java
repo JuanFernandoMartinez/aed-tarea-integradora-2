@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -69,6 +70,9 @@ public class GUIController {
 
 	@FXML
 	private TableColumn<Record, String> freeThrowColumn;
+	
+	@FXML
+	private Label timeSearchLabel;
 	
 	private final ObservableList<Record> dataList = FXCollections.observableArrayList();
 
@@ -159,10 +163,12 @@ public class GUIController {
 	}
 
 	public void search(ActionEvent event) {
-
+		
 		if(sortingComboBox.getSelectionModel().isEmpty())
 			JOptionPane.showMessageDialog(null, "Selecta valid search standard", "Invalid standard", JOptionPane.PLAIN_MESSAGE, null);
 		else {
+			long time = System.currentTimeMillis();
+			dataList.clear();
 			String value = searchTextField.getText();
 			ArrayList<String> data = new ArrayList<>();
 			try {
@@ -186,6 +192,8 @@ public class GUIController {
 
 				}
 
+				time = System.currentTimeMillis() - time;
+				
 				for(int i = 0; i<data.size(); i++) {
 			
 					Record record = new Record(data.get(i).split(",")[2], data.get(i).split(",")[3], data.get(i).split(",")[1],
@@ -193,7 +201,8 @@ public class GUIController {
 	                dataList.add(record);
 					
 				}	
-
+				
+				timeSearchLabel.setText(time+" ms");
 
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Input a valid value", "Invalid Value", JOptionPane.PLAIN_MESSAGE, null);

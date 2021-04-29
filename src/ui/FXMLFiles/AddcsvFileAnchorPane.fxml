@@ -3,20 +3,23 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="773.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Add a CSV file">
+            <Label styleClass="title" text="Add a CSV file">
                <VBox.margin>
                   <Insets bottom="35.0" />
                </VBox.margin>
+               <font>
+                  <Font name="Berlin Sans FB" size="35.0" />
+               </font>
             </Label>
             <HBox alignment="CENTER" spacing="20.0">
                <children>
@@ -24,11 +27,6 @@
                   <Button fx:id="addFileButton" mnemonicParsing="false" onAction="#addFile" prefWidth="70.0" text="Add" />
                </children>
             </HBox>
-            <ProgressBar prefWidth="380.0" progress="0.0">
-               <VBox.margin>
-                  <Insets top="35.0" />
-               </VBox.margin>
-            </ProgressBar>
          </children>
       </VBox>
    </center>

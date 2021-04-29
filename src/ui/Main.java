@@ -12,7 +12,6 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
 		try {
 			gui = new GUIController();
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLFiles/ContainerBorderPane.fxml"));
@@ -31,7 +30,6 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		launch(args);
 	}
 
