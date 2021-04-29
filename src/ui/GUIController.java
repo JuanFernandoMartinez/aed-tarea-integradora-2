@@ -194,6 +194,10 @@ public class GUIController {
 
 				time = System.currentTimeMillis() - time;
 				
+				if(data.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "No results found", "No results", JOptionPane.PLAIN_MESSAGE, null);
+				}
+				
 				for(int i = 0; i<data.size(); i++) {
 			
 					Record record = new Record(data.get(i).split(",")[2], data.get(i).split(",")[3], data.get(i).split(",")[1],
@@ -203,6 +207,9 @@ public class GUIController {
 				}	
 				
 				timeSearchLabel.setText(time+" ms");
+				
+				sortingComboBox.getSelectionModel().clearSelection();
+				searchTextField.clear();
 
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Input a valid value", "Invalid Value", JOptionPane.PLAIN_MESSAGE, null);
@@ -216,6 +223,10 @@ public class GUIController {
 
 	public void endProgram(ActionEvent event) {
 		System.exit(0);
+	}
+	
+	public void help(ActionEvent event) {
+		JOptionPane.showMessageDialog(null, "Help info", "Help", JOptionPane.PLAIN_MESSAGE, null);
 	}
 
 	public class Record {
