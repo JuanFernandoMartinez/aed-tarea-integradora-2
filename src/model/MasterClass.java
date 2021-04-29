@@ -1,5 +1,4 @@
 package model;
-import exceptions.RepeatedElementException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,6 +14,13 @@ public class MasterClass {
     private BST<Double,ArrayList<Long>> blk;
     private File file;
     private String[] cell;
+    
+    public final static int TS = 0;
+    public final static int FTR = 1;
+    public final static int TRB = 2;
+    public final static int ORB = 3;
+    public final static int BLK = 4;
+    
 
     public MasterClass() {
         ts = new AVL<>();
@@ -105,94 +111,38 @@ public class MasterClass {
 
     }
 
-    public ArrayList<String> searchByts(double p) throws IOException {
+    public ArrayList<String> search(int tree, double p) throws IOException {
         ArrayList<String> result = new ArrayList<String>();
-
-        ArrayList<Long> position = ts.search(p);
-
-        if (position.size() != 0) {
-            RandomAccessFile raf = new RandomAccessFile(file, "r");
-
-            for (int i = 0; i < position.size(); i++) {
-                raf.seek(position.get(i));
-                result.add(raf.readLine());
-
-            }
-            raf.close();
+        ArrayList<Long> position = null;
+        
+        switch(tree) {
+        case TS:
+            position = ts.search(p);
+            break;
+            
+        case FTR:
+            position = ftr.search(p);
+            break;
+            
+        case TRB:
+            position = trb.search(p);
+            break;
+            
+        case ORB:
+            position = orb.search(p);
+            break;
+            
+        case BLK:
+        	position = orb.search(p);
+        	break;
         }
 
-        return result;
-    }
-
-    public ArrayList<String> searchByftr(double p) throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
-
-        ArrayList<Long> position = ftr.search(p);
-
         if (position.size() != 0) {
             RandomAccessFile raf = new RandomAccessFile(file, "r");
 
             for (int i = 0; i < position.size(); i++) {
                 raf.seek(position.get(i));
                 result.add(raf.readLine());
-
-            }
-            raf.close();
-        }
-
-        return result;
-    }
-
-    public ArrayList<String> searchBytrb(double p) throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
-
-        ArrayList<Long> position = trb.search(p);
-
-        if (position.size() != 0) {
-            RandomAccessFile raf = new RandomAccessFile(file, "r");
-
-            for (int i = 0; i < position.size(); i++) {
-                raf.seek(position.get(i));
-                result.add(raf.readLine());
-
-            }
-            raf.close();
-        }
-
-        return result;
-    }
-
-    public ArrayList<String> searchByorb(double p) throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
-
-        ArrayList<Long> position = orb.search(p);
-
-        if (position.size() != 0) {
-            RandomAccessFile raf = new RandomAccessFile(file, "r");
-
-            for (int i = 0; i < position.size(); i++) {
-                raf.seek(position.get(i));
-                result.add(raf.readLine());
-
-            }
-            raf.close();
-        }
-
-        return result;
-    }
-
-    public ArrayList<String> searchByblk(double p) throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
-
-        ArrayList<Long> position = blk.search(p);
-
-        if (position.size() != 0) {
-            RandomAccessFile raf = new RandomAccessFile(file, "r");
-
-            for (int i = 0; i < position.size(); i++) {
-                raf.seek(position.get(i));
-                result.add(raf.readLine());
-
             }
             raf.close();
         }
@@ -212,6 +162,4 @@ public class MasterClass {
         pw.close();
         raf.close();
     }
-
-
 }

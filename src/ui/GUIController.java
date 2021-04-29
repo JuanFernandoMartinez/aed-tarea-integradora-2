@@ -169,19 +169,19 @@ public class GUIController {
 				switch (sortingComboBox.getSelectionModel().getSelectedItem()) {
 
 				case "Total Rebounds":
-					data = masterClass.searchBytrb(Double.parseDouble(value));
+					data = masterClass.search(MasterClass.TRB, Double.parseDouble(value));
 					break;
 				case "Offensive Rebounds":
-					data = masterClass.searchByorb(Double.parseDouble(value));
+					data = masterClass.search(MasterClass.ORB, Double.parseDouble(value));
 					break;
 				case "Blocks":
-					data = masterClass.searchByblk(Double.parseDouble(value));
+					data = masterClass.search(MasterClass.BLK, Double.parseDouble(value));
 					break;
 				case "True Shooting %":
-					data = masterClass.searchByts(Double.parseDouble(value));
+					data = masterClass.search(MasterClass.TS, Double.parseDouble(value));
 					break;
 				case "Free Throw %":
-					data = masterClass.searchByftr(Double.parseDouble(value));
+					data = masterClass.search(MasterClass.FTR, Double.parseDouble(value));
 					break;
 
 				}
