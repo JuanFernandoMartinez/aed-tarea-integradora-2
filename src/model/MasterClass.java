@@ -133,7 +133,7 @@ public class MasterClass {
             break;
             
         case BLK:
-        	position = orb.search(p);
+        	position = blk.search(p);
         	break;
         }
 
