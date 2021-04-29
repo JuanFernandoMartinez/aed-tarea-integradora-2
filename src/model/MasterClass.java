@@ -113,7 +113,7 @@ public class MasterClass {
 
     public ArrayList<String> search(int tree, double p) throws IOException {
         ArrayList<String> result = new ArrayList<String>();
-        ArrayList<Long> position = null;
+        ArrayList<Long> position = new ArrayList<Long>();
         
         switch(tree) {
         case TS:
