@@ -19,7 +19,7 @@ public class Main extends Application {
 			fxmlLoader.setController(gui);
 			Parent root = fxmlLoader.load();
 			Scene scene = new Scene(root,1280,800);
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			primaryStage.centerOnScreen();

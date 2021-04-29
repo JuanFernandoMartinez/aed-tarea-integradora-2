@@ -2,16 +2,23 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import model.MasterClass;
@@ -36,7 +43,34 @@ public class GUIController {
 	@FXML
 	private TextField searchTextField;
 
+	@FXML
+	private TableView<Record> dataTableView;
 
+	@FXML
+	private TableColumn<Record, String> nameColumn;
+
+	@FXML
+	private TableColumn<Record, String> ageColumn;
+
+	@FXML
+	private TableColumn<Record, String> teamColumn;
+
+	@FXML
+	private TableColumn<Record, String> totalReboundsColumn;
+
+	@FXML
+	private TableColumn<Record, String> offensiveReboundsColumn;
+
+	@FXML
+	private TableColumn<Record, String> blocksColumn;
+
+	@FXML
+	private TableColumn<Record, String> trueShootingColumn;
+
+	@FXML
+	private TableColumn<Record, String> freeThrowColumn;
+	
+	private final ObservableList<Record> dataList = FXCollections.observableArrayList();
 
 	private FileChooser fileChooser;
 
@@ -74,6 +108,7 @@ public class GUIController {
 		mainPanel.setCenter(pane);
 	}
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	public void openSearchElement(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLFiles/SearchAnchorPane.fxml"));
@@ -88,6 +123,21 @@ public class GUIController {
 		sortingComboBox.getItems().add("Blocks");
 		sortingComboBox.getItems().add("True Shooting %");
 		sortingComboBox.getItems().add("Free Throw %");
+		
+		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+        teamColumn.setCellValueFactory(new PropertyValueFactory<>("team"));
+        totalReboundsColumn.setCellValueFactory(new PropertyValueFactory<>("totalRebounds"));
+        offensiveReboundsColumn.setCellValueFactory(new PropertyValueFactory<>("offensiveRebounds"));
+        blocksColumn.setCellValueFactory(new PropertyValueFactory<>("blocks"));
+        trueShootingColumn.setCellValueFactory(new PropertyValueFactory<>("trueShooting"));
+        freeThrowColumn.setCellValueFactory(new PropertyValueFactory<>("freeThrow"));
+ 
+        dataTableView.setItems(dataList);
+        dataTableView.getColumns().setAll(
+        		nameColumn, ageColumn, teamColumn, totalReboundsColumn,
+        		offensiveReboundsColumn, blocksColumn, trueShootingColumn, freeThrowColumn);
+ 
 	}
 
 	public void addFile(ActionEvent event) throws IOException {
@@ -110,39 +160,105 @@ public class GUIController {
 
 	public void search(ActionEvent event) {
 
-		String value = searchTextField.getText();
-
-		switch (sortingComboBox.getSelectionModel().getSelectedItem()) {
-		case "Total Rebounds":
+		if(sortingComboBox.getSelectionModel().isEmpty())
+			JOptionPane.showMessageDialog(null, "Selecta valid search standard", "Invalid standard", JOptionPane.PLAIN_MESSAGE, null);
+		else {
+			String value = searchTextField.getText();
+			ArrayList<String> data = new ArrayList<>();
 			try {
-				masterClass.searchBytrb(Double.parseDouble(value));
+				switch (sortingComboBox.getSelectionModel().getSelectedItem()) {
+
+				case "Total Rebounds":
+					data = masterClass.searchBytrb(Double.parseDouble(value));
+					break;
+				case "Offensive Rebounds":
+					data = masterClass.searchByorb(Double.parseDouble(value));
+					break;
+				case "Blocks":
+					data = masterClass.searchByblk(Double.parseDouble(value));
+					break;
+				case "True Shooting %":
+					data = masterClass.searchByts(Double.parseDouble(value));
+					break;
+				case "Free Throw %":
+					data = masterClass.searchByftr(Double.parseDouble(value));
+					break;
+
+				}
+
+				for(int i = 0; i<data.size(); i++) {
+			
+					Record record = new Record(data.get(i).split(",")[2], data.get(i).split(",")[3], data.get(i).split(",")[1],
+							data.get(i).split(",")[13], data.get(i).split(",")[11], data.get(i).split(",")[16],data.get(i).split(",")[7],data.get(i).split(",")[10]);
+	                dataList.add(record);
+					
+				}	
+
+
 			} catch (NumberFormatException e) {
-				JOptionPane.showInternalMessageDialog(null, "Input a valid value", "Invalid Value", JOptionPane.PLAIN_MESSAGE, null);;
+				JOptionPane.showMessageDialog(null, "Input a valid value", "Invalid Value", JOptionPane.PLAIN_MESSAGE, null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			break;
-		case "Offensive Rebounds":
-			break;
-		case "Blocks":
-			break;
-		case "True Shooting %":
-			break;
-		case "Free Throw %":
-			break;
 
 		}
-
-
-	}
-
-	public void selectedSearchStandard(ActionEvent event) {
-
 	}
 
 	public void endProgram(ActionEvent event) {
 		System.exit(0);
+	}
+
+	public class Record {
+
+		private SimpleStringProperty name, age, team, totalRebounds, offensiveRebounds, blocks, trueShooting, freeThrow;
+
+		public String getName() {
+			return name.get();
+		}
+
+		public String getAge() {
+			return age.get();
+		}
+
+		public String getTeam() {
+			return team.get();
+		}
+
+		public String getTotalRebounds() {
+			return totalRebounds.get();
+		}
+
+		public String getOffensiveRebounds() {
+			return offensiveRebounds.get();
+		}
+
+		public String getBlocks() {
+			return blocks.get();
+		}
+
+		public String getTrueShooting() {
+			return trueShooting.get();
+		}
+
+		public String getFreeThrow() {
+			return freeThrow.get();
+		}
+
+		public Record(String name, String age, String team,
+				String totalRebounds, String offensiveRebounds, String blocks,
+				String trueShooting, String freeThrow) {
+			
+			this.name = new SimpleStringProperty(name);
+			this.age = new SimpleStringProperty(age);
+			this.team = new SimpleStringProperty(team);
+			this.totalRebounds = new SimpleStringProperty(totalRebounds);
+			this.offensiveRebounds = new SimpleStringProperty(offensiveRebounds);
+			this.blocks = new SimpleStringProperty(blocks);
+			this.trueShooting = new SimpleStringProperty(trueShooting);
+			this.freeThrow = new SimpleStringProperty(freeThrow);
+		}
+
 	}
 
 }
