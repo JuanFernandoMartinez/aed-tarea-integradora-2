@@ -1,0 +1,7 @@
+Hey dear reader 
+this message is for inform you that we implemented a funcional
+ REdBalckTree but it work too late to add high volume of data 
+so if you want to test it you can do it with the file in /test/data/testData.csv
+thakyou so much have a nice weekend
+
+
