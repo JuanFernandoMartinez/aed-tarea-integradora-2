@@ -2,19 +2,20 @@ package model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.function.Function;
 
-
-
+import au.com.bytecode.opencsv.CSVReader;
 import structs.AVL;
 import structs.BST;
 import structs.RedBlackTree;
 
 public class MasterClass {
-    private RedBlackTree<Double,ArrayList<Long>> ts;
-    private RedBlackTree<Double,ArrayList<Long>> ftr;
-    private RedBlackTree<Double,ArrayList<Long>> trb;
-    private RedBlackTree<Double,ArrayList<Long>> orb;
+    private AVL<Double,ArrayList<Long>> ts;
+    private AVL<Double,ArrayList<Long>> ftr;
+    private AVL<Double,ArrayList<Long>> trb;
+    private AVL<Double,ArrayList<Long>> orb;
     private BST<Double,ArrayList<Long>> blk;
     private File file;
     private String[] cell;
@@ -27,10 +28,10 @@ public class MasterClass {
     
 
     public MasterClass() {
-        ts = new RedBlackTree<>();
-        ftr = new RedBlackTree<>();
-        trb = new RedBlackTree<>();
-        orb = new RedBlackTree<>();
+        ts = new AVL<>();
+        ftr = new AVL<>();
+        trb = new AVL<>();
+        orb = new AVL<>();
         blk = new BST<>();
     }
 
@@ -51,20 +52,20 @@ public class MasterClass {
 
             if (cell[7].equals("") == false) {
                 if (!ts.keyExists(Double.parseDouble(cell[7]))) {
-                    ts.insert(Double.parseDouble(cell[7]), new ArrayList<Long>());
+                    ts.add(Double.parseDouble(cell[7]), new ArrayList<Long>());
                 }
-                ts.searchValue(Double.parseDouble(cell[7])).add(pos);
+                ts.search(Double.parseDouble(cell[7])).add(pos);
 
             }
 
             if (cell[9].equals("") == false) {
 
                 if (ftr.keyExists(Double.parseDouble(cell[9]))) {
-                    ftr.searchValue(Double.parseDouble(cell[9])).add(pos);
+                    ftr.search(Double.parseDouble(cell[9])).add(pos);
 
                 } else {
-                    ftr.insert(Double.parseDouble(cell[9]), new ArrayList<Long>());
-                    ftr.searchValue(Double.parseDouble(cell[9])).add(pos);
+                    ftr.add(Double.parseDouble(cell[9]), new ArrayList<Long>());
+                    ftr.search(Double.parseDouble(cell[9])).add(pos);
 
                 }
 
@@ -73,11 +74,11 @@ public class MasterClass {
             if (cell[12].equals("") == false) {
 
                 if (trb.keyExists(Double.parseDouble(cell[12]))) {
-                    trb.searchValue(Double.parseDouble(cell[12])).add(pos);
+                    trb.search(Double.parseDouble(cell[12])).add(pos);
 
                 } else {
-                    trb.insert(Double.parseDouble(cell[12]), new ArrayList<Long>());
-                    trb.searchValue(Double.parseDouble(cell[12])).add(pos);
+                    trb.add(Double.parseDouble(cell[12]), new ArrayList<Long>());
+                    trb.search(Double.parseDouble(cell[12])).add(pos);
 
                 }
 
@@ -86,12 +87,12 @@ public class MasterClass {
             if (!cell[10].equals("")) {
 
                 if (orb.keyExists(Double.parseDouble(cell[10]))) {
-                    orb.searchValue(Double.parseDouble(cell[10])).add(pos);
+                    orb.search(Double.parseDouble(cell[10])).add(pos);
 
                 } else {
-                    orb.insert(Double.parseDouble(cell[10]), new ArrayList<Long>());
+                    orb.add(Double.parseDouble(cell[10]), new ArrayList<Long>());
 
-                    orb.searchValue(Double.parseDouble(cell[10])).add(pos);
+                    orb.search(Double.parseDouble(cell[10])).add(pos);
 
                 }
             }
@@ -125,19 +126,19 @@ public class MasterClass {
         
         switch(tree) {
         case TS:
-            position = ts.searchValue(p);
+            position = ts.search(p);
             break;
             
         case FTR:
-            position = ftr.searchValue(p);
+            position = ftr.search(p);
             break;
             
         case TRB:
-            position = trb.searchValue(p);
+            position = trb.search(p);
             break;
             
         case ORB:
-            position = orb.searchValue(p);
+            position = orb.search(p);
             break;
             
         case BLK:
@@ -147,56 +148,32 @@ public class MasterClass {
 
         if (position != null) {
         	
-            RandomAccessFile raf = new RandomAccessFile(file, "r");
-            
-            
+        	CSVReader reader = new CSVReader(new FileReader(file));
+        	Collections.sort(position);
+            ArrayList<String[]> aux = (ArrayList<String[]>)reader.readAll();
             for (int i = 0; i < position.size(); i++) {
-            	
-            	
-            	
-                raf.seek(35*(position.get(i)));
-                result.add(raf.readLine());
+            	String a = Arrays.toString(aux.get(position.get(i).intValue()));
+            	a.replace("[", "");
+            	a.replace("]", "");
+            	result.add(a);
+ 
             }
-            raf.close();
+            
         }
 
         return result;
     }
 
-<<<<<<< HEAD
-    
-    
-    
-    
-    public void exportData(String fileName) throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
-        PrintWriter pw = new PrintWriter(fileName);
-        RandomAccessFile raf = new RandomAccessFile(file, "r");
-        for (int i = 0; i < cell.length; i++) {
-            result.add(raf.readLine());
-            pw.println(result);
 
-        }
-        pw.close();
-        raf.close();
-    }
-
-	public RedBlackTree<Double, ArrayList<Long>> getTs() {
-=======
-	public AVL<Double, ArrayList<Long>> getTs() {
->>>>>>> 83ddb8bc8b1ddb39be6e4df8347bd12085c05517
-		return ts;
-	}
-
-	public  RedBlackTree<Double, ArrayList<Long>> getFtr() {
+	public  AVL<Double, ArrayList<Long>> getFtr() {
 		return ftr;
 	}
 
-	public  RedBlackTree<Double, ArrayList<Long>> getTrb() {
+	public  AVL<Double, ArrayList<Long>> getTrb() {
 		return trb;
 	}
 
-	public  RedBlackTree<Double, ArrayList<Long>> getOrb() {
+	public  AVL<Double, ArrayList<Long>> getOrb() {
 		return orb;
 	}
 
