@@ -248,4 +248,48 @@ public class MasterClass {
          }
      }
 
+	public AVL<Double, ArrayList<Long>> getTs() {
+		return ts;
+	}
+
+	public void setTs(AVL<Double, ArrayList<Long>> ts) {
+		this.ts = ts;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String[] getCell() {
+		return cell;
+	}
+
+	public void setCell(String[] cell) {
+		this.cell = cell;
+	}
+
+	
+
+	public void setFtr(AVL<Double, ArrayList<Long>> ftr) {
+		this.ftr = ftr;
+	}
+
+	public void setTrb(AVL<Double, ArrayList<Long>> trb) {
+		this.trb = trb;
+	}
+
+	public void setOrb(AVL<Double, ArrayList<Long>> orb) {
+		this.orb = orb;
+	}
+
+	public void setBlk(BST<Double, ArrayList<Long>> blk) {
+		this.blk = blk;
+	}
+     
+     
+
 }
