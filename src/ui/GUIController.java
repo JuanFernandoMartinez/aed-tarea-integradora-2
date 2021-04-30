@@ -226,7 +226,7 @@ public class GUIController {
 	}
 	
 	public void help(ActionEvent event) {
-		JOptionPane.showMessageDialog(null, "Help info", "Help", JOptionPane.PLAIN_MESSAGE, null);
+		JOptionPane.showMessageDialog(null, "made with blood sweat and tears!!", "Help", JOptionPane.PLAIN_MESSAGE, null);
 	}
 
 	public class Record {
