@@ -201,7 +201,7 @@ public class GUIController {
 				for(int i = 0; i<data.size(); i++) {
 			
 					Record record = new Record(data.get(i).split(",")[2], data.get(i).split(",")[3], data.get(i).split(",")[1],
-							data.get(i).split(",")[13], data.get(i).split(",")[11], data.get(i).split(",")[16],data.get(i).split(",")[7],data.get(i).split(",")[10]);
+							data.get(i).split(",")[12], data.get(i).split(",")[10], data.get(i).split(",")[15],data.get(i).split(",")[7],data.get(i).split(",")[9]);
 	                dataList.add(record);
 					
 				}	
@@ -210,7 +210,7 @@ public class GUIController {
 				
 				sortingComboBox.getSelectionModel().clearSelection();
 				searchTextField.clear();
-
+				
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Input a valid value", "Invalid Value", JOptionPane.PLAIN_MESSAGE, null);
 			} catch (IOException e) {
