@@ -16,7 +16,8 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#openAddFileCSV" text="Add File (.csv)" />
-                  <MenuItem mnemonicParsing="false" onAction="#openAddAnElement" text="Add an element" />
+                  <MenuItem mnemonicParsing="false" onAction="#openAddAnElement" text="Add an element" visible="false" />
+                  <MenuItem mnemonicParsing="false" text="Delete an element" visible="false" />
                   <MenuItem mnemonicParsing="false" onAction="#openSearchElement" text="Search an Element" />
                   <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#endProgram" text="Close" />
