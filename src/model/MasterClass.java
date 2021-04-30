@@ -2,6 +2,9 @@ package model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.function.Function;
+
+
 
 import structs.AVL;
 import structs.BST;
@@ -41,7 +44,7 @@ public class MasterClass {
 
         long pos = 0;
         String temp = br.readLine();
-        
+        pos = 1;
         while (temp != null)
         	{
         	cell = temp.split(",");
@@ -54,53 +57,53 @@ public class MasterClass {
 
             }
 
-            if (cell[10].equals("") == false) {
+            if (cell[9].equals("") == false) {
 
-                if (ftr.keyExists(Double.parseDouble(cell[10]))) {
-                    ftr.searchValue(Double.parseDouble(cell[10])).add(pos);
+                if (ftr.keyExists(Double.parseDouble(cell[9]))) {
+                    ftr.searchValue(Double.parseDouble(cell[9])).add(pos);
 
                 } else {
-                    ftr.insert(Double.parseDouble(cell[10]), new ArrayList<Long>());
-                    ftr.searchValue(Double.parseDouble(cell[10])).add(pos);
+                    ftr.insert(Double.parseDouble(cell[9]), new ArrayList<Long>());
+                    ftr.searchValue(Double.parseDouble(cell[9])).add(pos);
 
                 }
 
             }
 
-            if (cell[13].equals("") == false) {
+            if (cell[12].equals("") == false) {
 
-                if (trb.keyExists(Double.parseDouble(cell[13]))) {
-                    trb.searchValue(Double.parseDouble(cell[13])).add(pos);
+                if (trb.keyExists(Double.parseDouble(cell[12]))) {
+                    trb.searchValue(Double.parseDouble(cell[12])).add(pos);
 
                 } else {
-                    trb.insert(Double.parseDouble(cell[13]), new ArrayList<Long>());
-                    trb.searchValue(Double.parseDouble(cell[13])).add(pos);
+                    trb.insert(Double.parseDouble(cell[12]), new ArrayList<Long>());
+                    trb.searchValue(Double.parseDouble(cell[12])).add(pos);
 
                 }
 
             }
 
-            if (!cell[11].equals("")) {
+            if (!cell[10].equals("")) {
 
-                if (orb.keyExists(Double.parseDouble(cell[11]))) {
-                    orb.searchValue(Double.parseDouble(cell[11])).add(pos);
+                if (orb.keyExists(Double.parseDouble(cell[10]))) {
+                    orb.searchValue(Double.parseDouble(cell[10])).add(pos);
 
                 } else {
-                    orb.insert(Double.parseDouble(cell[11]), new ArrayList<Long>());
+                    orb.insert(Double.parseDouble(cell[10]), new ArrayList<Long>());
 
-                    orb.searchValue(Double.parseDouble(cell[11])).add(pos);
+                    orb.searchValue(Double.parseDouble(cell[10])).add(pos);
 
                 }
             }
 
-            if (cell[16].equals("") == false) {
+            if (cell[15].equals("") == false) {
 
-                if (blk.keyExists(Double.parseDouble(cell[16]))) {
-                    blk.search(Double.parseDouble(cell[16])).add(pos);
+                if (blk.keyExists(Double.parseDouble(cell[15]))) {
+                    blk.search(Double.parseDouble(cell[15])).add(pos);
 
                 } else {
-                    blk.add(Double.parseDouble(cell[16]), new ArrayList<Long>());
-                    blk.search(Double.parseDouble(cell[16])).add(pos);
+                    blk.add(Double.parseDouble(cell[15]), new ArrayList<Long>());
+                    blk.search(Double.parseDouble(cell[15])).add(pos);
 
                 }
 
@@ -143,10 +146,15 @@ public class MasterClass {
         }
 
         if (position != null) {
+        	
             RandomAccessFile raf = new RandomAccessFile(file, "r");
-
+            
+            
             for (int i = 0; i < position.size(); i++) {
-                raf.seek(position.get(i));
+            	
+            	
+            	
+                raf.seek(35*(position.get(i)));
                 result.add(raf.readLine());
             }
             raf.close();
@@ -155,6 +163,10 @@ public class MasterClass {
         return result;
     }
 
+    
+    
+    
+    
     public void exportData(String fileName) throws IOException {
         ArrayList<String> result = new ArrayList<String>();
         PrintWriter pw = new PrintWriter(fileName);
@@ -168,19 +180,19 @@ public class MasterClass {
         raf.close();
     }
 
-	public AVL<Double, ArrayList<Long>> getTs() {
+	public RedBlackTree<Double, ArrayList<Long>> getTs() {
 		return ts;
 	}
 
-	public AVL<Double, ArrayList<Long>> getFtr() {
+	public  RedBlackTree<Double, ArrayList<Long>> getFtr() {
 		return ftr;
 	}
 
-	public AVL<Double, ArrayList<Long>> getTrb() {
+	public  RedBlackTree<Double, ArrayList<Long>> getTrb() {
 		return trb;
 	}
 
-	public AVL<Double, ArrayList<Long>> getOrb() {
+	public  RedBlackTree<Double, ArrayList<Long>> getOrb() {
 		return orb;
 	}
 
