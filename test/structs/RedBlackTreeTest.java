@@ -18,14 +18,19 @@ class RedBlackTreeTest {
 		setup1();
 		assertEquals(0,a.size());
 		a.insert(10, 1);
-		assertEquals(1,a.size());
 		a.insert(12, 2);
+		a.insert(15, 3);
+		a.insert(5, 4);
+		a.insert(6, 5);
 		
-		assertEquals(2,a.size());
+		assertEquals(1,a.searchValue(10));
+		assertEquals(2,a.searchValue(12));
+		assertEquals(3,a.searchValue(15));
+		assertEquals(4,a.searchValue(5));
+		assertEquals(5,a.searchValue(6));
+		assertEquals(null,a.searchValue(21));
 		
-		assertEquals(2,a.search(12).getValue());
-		
-		assertEquals(1,a.search(10).getValue());
+	
 		
 	}
 
