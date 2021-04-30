@@ -150,19 +150,6 @@ public class MasterClass {
         return result;
     }
 
-    public void exportData(String fileName) throws IOException {
-        ArrayList<String> result = new ArrayList<String>();
-        PrintWriter pw = new PrintWriter(fileName);
-        RandomAccessFile raf = new RandomAccessFile(file, "r");
-        for (int i = 0; i < cell.length; i++) {
-            result.add(raf.readLine());
-            pw.println(result);
-
-        }
-        pw.close();
-        raf.close();
-    }
-
 	public AVL<Double, ArrayList<Long>> getTs() {
 		return ts;
 	}
@@ -182,4 +169,72 @@ public class MasterClass {
 	public BST<Double, ArrayList<Long>> getBlk() {
 		return blk;
 	}
+
+	 public boolean removeBytsFile(double p) throws IOException {
+
+         String paramRemove = Double.toString(p);
+
+         File tempFile = new File("myTempFile.txt");
+
+         if (!file.exists()) {
+             file.createNewFile();
+         }
+
+         if (!tempFile.exists()) {
+             tempFile.createNewFile();
+         }
+
+         BufferedReader reader = new BufferedReader(new FileReader(file));
+         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+         String currentLine = reader.readLine();
+
+         while ((currentLine) != null) {
+             // trim newline when comparing with lineToRemove
+             String trimmedLine = currentLine.trim();
+
+             String[] cell = trimmedLine.split(",");
+
+             String temp = reader.readLine();
+
+             if (!cell[7].equals(paramRemove)) {
+                 if (temp == null) {
+                     writer.write(currentLine);
+                 } else {
+
+                     writer.write(currentLine + "\n");
+                 }
+             }
+
+         }
+
+         reader.close();
+         writer.close();
+         boolean val = tempFile.renameTo(file);
+
+         readFiles(this.file);
+         return val;
+
+     }
+
+     public void removeByts(double p) throws IOException {
+
+        removeBytsFile(p);
+
+        ArrayList<String> result = new ArrayList<>();
+         ArrayList<Long> position;
+         position = ts.search(p);
+
+         if (position.size() != 0) {
+             RandomAccessFile raf = new RandomAccessFile(file, "r");
+
+             for (int i = 0; i < position.size(); i++) {
+                 raf.seek(position.get(i));
+                 result.remove(raf.readLine());
+
+             }
+             raf.close();
+         }
+     }
+
 }
