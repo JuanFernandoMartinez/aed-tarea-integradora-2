@@ -29,9 +29,7 @@ class RedBlackTreeTest {
 		assertEquals(4,a.searchValue(5));
 		assertEquals(5,a.searchValue(6));
 		assertEquals(null,a.searchValue(21));
-		
-	
-		
+
 	}
 
 }
