@@ -55,6 +55,22 @@ class AVLTest {
 		
 	}
 	
-	
+	@Test
+	void testSearch() {
+		setup1();
+		a.add(10, null);
+		a.add(5, null);
+		a.add(6, null);
+		a.add(3, null);
+		a.add(4, null);
+		a.add(7, null);
+		a.add(15, 7);
+		a.add(12, null);
+		a.add(17, null);
+		a.add(16, null);
+		
+		assertEquals(7,a.search(15));
+		assertNull(a.search(32));
+	}
 
 }
