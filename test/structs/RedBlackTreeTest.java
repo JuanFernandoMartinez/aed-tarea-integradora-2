@@ -28,5 +28,18 @@ class RedBlackTreeTest {
 		assertEquals(1,a.search(10).getValue());
 		
 	}
+	
+	@Test
+	public void testSearch() {
+		setup1();
+		a.insert(12, 2);
+		a.insert(5, 7);
+		a.insert(6, 9);
+		a.insert(77, 4);
+		
+		assertEquals(2, a.searchValue(12));
+		assertEquals(9, a.searchValue(6));
+		assertNull(a.searchValue(21));
+	}
 
 }

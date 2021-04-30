@@ -162,4 +162,24 @@ public class MasterClass {
         pw.close();
         raf.close();
     }
+
+	public AVL<Double, ArrayList<Long>> getTs() {
+		return ts;
+	}
+
+	public AVL<Double, ArrayList<Long>> getFtr() {
+		return ftr;
+	}
+
+	public AVL<Double, ArrayList<Long>> getTrb() {
+		return trb;
+	}
+
+	public AVL<Double, ArrayList<Long>> getOrb() {
+		return orb;
+	}
+
+	public BST<Double, ArrayList<Long>> getBlk() {
+		return blk;
+	}
 }
