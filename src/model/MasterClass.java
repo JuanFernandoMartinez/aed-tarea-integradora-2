@@ -5,12 +5,13 @@ import java.util.ArrayList;
 
 import structs.AVL;
 import structs.BST;
+import structs.RedBlackTree;
 
 public class MasterClass {
-    private AVL<Double,ArrayList<Long>> ts;
-    private AVL<Double,ArrayList<Long>> ftr;
-    private AVL<Double,ArrayList<Long>> trb;
-    private AVL<Double,ArrayList<Long>> orb;
+    private RedBlackTree<Double,ArrayList<Long>> ts;
+    private RedBlackTree<Double,ArrayList<Long>> ftr;
+    private RedBlackTree<Double,ArrayList<Long>> trb;
+    private RedBlackTree<Double,ArrayList<Long>> orb;
     private BST<Double,ArrayList<Long>> blk;
     private File file;
     private String[] cell;
@@ -23,42 +24,44 @@ public class MasterClass {
     
 
     public MasterClass() {
-        ts = new AVL<>();
-        ftr = new AVL<>();
-        trb = new AVL<>();
-        orb = new AVL<>();
+        ts = new RedBlackTree<>();
+        ftr = new RedBlackTree<>();
+        trb = new RedBlackTree<>();
+        orb = new RedBlackTree<>();
         blk = new BST<>();
     }
 
     public void readFiles(File file) throws IOException {
         this.file = file;
-        RandomAccessFile raf = new RandomAccessFile(file, "r");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        
+        //RandomAccessFile raf = new RandomAccessFile(file, "r");
 
-        raf.readLine();
+        br.readLine();
 
-        long pos = raf.getFilePointer();
-        String temp = raf.readLine();
-
-        do {
-
-            cell = temp.split(",");
+        long pos = 0;
+        String temp = br.readLine();
+        
+        while (temp != null)
+        	{
+        	cell = temp.split(",");
 
             if (cell[7].equals("") == false) {
                 if (!ts.keyExists(Double.parseDouble(cell[7]))) {
-                    ts.add(Double.parseDouble(cell[7]), new ArrayList<Long>());
+                    ts.insert(Double.parseDouble(cell[7]), new ArrayList<Long>());
                 }
-                ts.search(Double.parseDouble(cell[7])).add(pos);
+                ts.searchValue(Double.parseDouble(cell[7])).add(pos);
 
             }
 
             if (cell[10].equals("") == false) {
 
                 if (ftr.keyExists(Double.parseDouble(cell[10]))) {
-                    ftr.search(Double.parseDouble(cell[10])).add(pos);
+                    ftr.searchValue(Double.parseDouble(cell[10])).add(pos);
 
                 } else {
-                    ftr.add(Double.parseDouble(cell[10]), new ArrayList<Long>());
-                    ftr.search(Double.parseDouble(cell[10])).add(pos);
+                    ftr.insert(Double.parseDouble(cell[10]), new ArrayList<Long>());
+                    ftr.searchValue(Double.parseDouble(cell[10])).add(pos);
 
                 }
 
@@ -67,11 +70,11 @@ public class MasterClass {
             if (cell[13].equals("") == false) {
 
                 if (trb.keyExists(Double.parseDouble(cell[13]))) {
-                    trb.search(Double.parseDouble(cell[13])).add(pos);
+                    trb.searchValue(Double.parseDouble(cell[13])).add(pos);
 
                 } else {
-                    trb.add(Double.parseDouble(cell[13]), new ArrayList<Long>());
-                    trb.search(Double.parseDouble(cell[13])).add(pos);
+                    trb.insert(Double.parseDouble(cell[13]), new ArrayList<Long>());
+                    trb.searchValue(Double.parseDouble(cell[13])).add(pos);
 
                 }
 
@@ -80,12 +83,12 @@ public class MasterClass {
             if (!cell[11].equals("")) {
 
                 if (orb.keyExists(Double.parseDouble(cell[11]))) {
-                    orb.search(Double.parseDouble(cell[11])).add(pos);
+                    orb.searchValue(Double.parseDouble(cell[11])).add(pos);
 
                 } else {
-                    orb.add(Double.parseDouble(cell[11]), new ArrayList<Long>());
+                    orb.insert(Double.parseDouble(cell[11]), new ArrayList<Long>());
 
-                    orb.search(Double.parseDouble(cell[11])).add(pos);
+                    orb.searchValue(Double.parseDouble(cell[11])).add(pos);
 
                 }
             }
@@ -102,12 +105,14 @@ public class MasterClass {
                 }
 
             }
-            pos = raf.getFilePointer();
-            temp = raf.readLine();
+            //pos = raf.getFilePointer();
+            pos++;
+            temp = br.readLine();
 
-        } while (temp != null);
+        	}
 
-        raf.close();
+        //raf.close();
+        br.close();
 
     }
 
@@ -117,19 +122,19 @@ public class MasterClass {
         
         switch(tree) {
         case TS:
-            position = ts.search(p);
+            position = ts.searchValue(p);
             break;
             
         case FTR:
-            position = ftr.search(p);
+            position = ftr.searchValue(p);
             break;
             
         case TRB:
-            position = trb.search(p);
+            position = trb.searchValue(p);
             break;
             
         case ORB:
-            position = orb.search(p);
+            position = orb.searchValue(p);
             break;
             
         case BLK:
