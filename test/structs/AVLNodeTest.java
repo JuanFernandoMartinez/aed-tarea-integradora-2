@@ -54,7 +54,7 @@ class AVLNodeTest {
 		a.add(12, 2);
 		a.add(16, 4);
 		
-		assertEquals(null,a.search(24));
+		assertNull(a.search(24));
 		assertEquals(2,a.search(12).getValue());
 	}
 	

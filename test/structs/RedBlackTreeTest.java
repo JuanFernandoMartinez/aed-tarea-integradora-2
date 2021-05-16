@@ -28,7 +28,7 @@ class RedBlackTreeTest {
 		assertEquals(3,a.searchValue(15));
 		assertEquals(4,a.searchValue(5));
 		assertEquals(5,a.searchValue(6));
-		assertEquals(null,a.searchValue(21));
+		assertNull(a.searchValue(21));
 
 	}
 	
@@ -39,7 +39,7 @@ class RedBlackTreeTest {
 		a.insert(5, 7);
 		a.insert(6, 9);
 		a.insert(77, 4);
-		
+			
 		assertEquals(2, a.searchValue(12));
 		assertEquals(9, a.searchValue(6));
 		assertNull(a.searchValue(21));

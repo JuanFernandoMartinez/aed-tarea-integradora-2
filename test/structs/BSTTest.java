@@ -13,6 +13,11 @@ class BSTTest {
 		a = new BST<>();
 	}
 	
+	private void setup2() {
+		a.add('t', 305);
+		a.add('r', 35);
+		a.add('h', 23);
+	}
 	
 	@Test
 	public void testAdd()
@@ -32,12 +37,10 @@ class BSTTest {
 	public void testSearch()
 	{
 		setup1();
-		a.add('t', 305);
-		a.add('r', 35);
-		a.add('h', 23);
+		setup2();
 		
 		assertEquals(23, a.search('h'));
-		assertEquals(null,a.search('H'));
+		assertNull(a.search('H'));
 		
 	}
 	
@@ -45,15 +48,13 @@ class BSTTest {
 	public void testRemove()
 	{
 		setup1();
-		a.add('t', 305);
-		a.add('r', 35);
-		a.add('h', 23);
+		setup2();
 		
 		assertEquals(false,a.remove('H'));
 		
 		a.remove('t');
 		assertEquals(2,a.size());
-		assertEquals(null,a.search('t'));
+		assertNull(a.search('t'));
 		assertEquals('r',a.getRoot().getKey());
 		
 		a.add('t', 305);
@@ -61,7 +62,7 @@ class BSTTest {
 		a.remove('h');
 		
 		assertEquals(2,a.size());
-		assertEquals(null,a.getRoot().getLeft());
+		assertNull(a.getRoot().getLeft());
 		
 	}
 	
@@ -69,9 +70,9 @@ class BSTTest {
 	public void testIsEmpty()
 	{
 		setup1();
-		assertEquals(true,a.isEmpty());
+		assertTrue(a.isEmpty());
 		a.add('f', 404);
-		assertEquals(false,a.isEmpty());
+		assertFalse(a.isEmpty());
 	}
 	
 	@Test
@@ -80,8 +81,8 @@ class BSTTest {
 		setup1();
 		a.add('f', 404);
 		a.add('a', 202);
-		assertEquals(false,a.keyExists('b'));
-		assertEquals(true,a.keyExists('f'));
+		assertFalse(a.keyExists('b'));
+		assertTrue(a.keyExists('f'));
 	}
 
 }
