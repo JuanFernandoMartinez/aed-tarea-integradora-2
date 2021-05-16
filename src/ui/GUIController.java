@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

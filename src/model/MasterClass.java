@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.function.Function;
 
 import au.com.bytecode.opencsv.CSVReader;
 import structs.AVL;
-import structs.AVLNode;
 import structs.BST;
-import structs.RedBlackTree;
 
 public class MasterClass {
     private AVL<Double,ArrayList<Long>> ts;

@@ -1,6 +1,5 @@
 package structs;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AVLNode<K extends Comparable<K>,V> {
