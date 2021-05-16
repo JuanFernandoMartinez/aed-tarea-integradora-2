@@ -1,6 +1,6 @@
 package structs;
 
-
+import java.util.LinkedList;
 
 public class Node<K extends Comparable<K>,V> {
 
@@ -232,7 +232,33 @@ public class Node<K extends Comparable<K>,V> {
 		}
 	}
 	
-	
+	public LinkedList<V> searchByRange(K kStart, K kEnd)
+	{
+		LinkedList<V> temp = new LinkedList<>();
+		
+		if(kStart.compareTo(key)<0)
+		{
+			if (left != null)
+			{
+				temp.addAll(left.searchByRange(kStart,kEnd));
+			}
+		}
+		
+		if(kStart.compareTo(key)<=0&&kEnd.compareTo(key)>=0)
+		{
+			temp.add(value);
+		}
+		
+		if (kEnd.compareTo(key)>0)
+		{
+			if (right != null)
+			{
+				temp.addAll(right.searchByRange(kStart,kEnd));
+			}
+		}
+		
+		return temp;
+	}
 	
 	public Node<K, V> getParent() {
 		return parent;
