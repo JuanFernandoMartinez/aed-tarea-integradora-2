@@ -1,6 +1,6 @@
 package structs;
 
-
+import java.util.LinkedList;
 
 public class AVL<K extends Comparable<K>,V> implements AVLInterface<K, V> {
 	
@@ -79,6 +79,12 @@ public class AVL<K extends Comparable<K>,V> implements AVLInterface<K, V> {
 	public AVLNode<K, V> searchNode(K k) {
 		if (root == null) return null;
 		else return root.search(k);
+	}
+	
+	public LinkedList<V> searchByRange(K kStart, K kEnd)
+	{
+		if (root == null) return null;
+		else return root.searchByRange(kStart,kEnd);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package structs;
 
-
+import java.util.LinkedList;
 
 public class BST<K extends Comparable<K>,V> implements BSTInterface<K, V> {
 	
@@ -104,6 +104,12 @@ public class BST<K extends Comparable<K>,V> implements BSTInterface<K, V> {
 	public Node<K, V> searchNode(K k) {
 		if (root == null) return null;
 		else return root.search(k);	
+	}
+	
+	public LinkedList<V> searchByRange(K kStart, K kEnd)
+	{
+		if (root == null) return null;
+		else return root.searchByRange(kStart,kEnd);
 	}
 
 	@Override

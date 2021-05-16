@@ -42,7 +42,10 @@ public class GUIController {
 	private TextField labelURL;
 
 	@FXML
-	private TextField searchTextField;
+	private TextField initialRSearchTextField;
+	
+	@FXML
+	private TextField finalRSearchTextField;
 
 	@FXML
 	private TableView<Record> dataTableView;
@@ -164,30 +167,34 @@ public class GUIController {
 
 	public void search(ActionEvent event) {
 		
+		Double initialValue = Double.parseDouble(initialRSearchTextField.getText());
+		Double finalValue = Double.parseDouble(finalRSearchTextField.getText());
+		
 		if(sortingComboBox.getSelectionModel().isEmpty())
-			JOptionPane.showMessageDialog(null, "Selecta valid search standard", "Invalid standard", JOptionPane.PLAIN_MESSAGE, null);
+			JOptionPane.showMessageDialog(null, "Select a valid search standard", "Invalid standard", JOptionPane.PLAIN_MESSAGE, null);
+		else if(!(initialValue<=finalValue))
+			JOptionPane.showMessageDialog(null, "The initial range's value must to be less than the final range's value", "Invalid range", JOptionPane.PLAIN_MESSAGE, null);
 		else {
 			long time = System.currentTimeMillis();
 			dataList.clear();
-			String value = searchTextField.getText();
 			ArrayList<String> data = new ArrayList<>();
 			try {
 				switch (sortingComboBox.getSelectionModel().getSelectedItem()) {
 
 				case "Total Rebounds":
-					data = masterClass.search(MasterClass.TRB, Double.parseDouble(value));
+					data = masterClass.searchByRange(MasterClass.TRB, initialValue, finalValue);
 					break;
 				case "Offensive Rebounds":
-					data = masterClass.search(MasterClass.ORB, Double.parseDouble(value));
+					data = masterClass.searchByRange(MasterClass.ORB, initialValue, finalValue);
 					break;
 				case "Blocks":
-					data = masterClass.search(MasterClass.BLK, Double.parseDouble(value));
+					data = masterClass.searchByRange(MasterClass.BLK, initialValue, finalValue);
 					break;
 				case "True Shooting %":
-					data = masterClass.search(MasterClass.TS, Double.parseDouble(value));
+					data = masterClass.searchByRange(MasterClass.TS, initialValue, finalValue);
 					break;
 				case "Free Throw %":
-					data = masterClass.search(MasterClass.FTR, Double.parseDouble(value));
+					data = masterClass.searchByRange(MasterClass.FTR, initialValue, finalValue);
 					break;
 
 				}
@@ -209,7 +216,8 @@ public class GUIController {
 				timeSearchLabel.setText(time+" ms");
 				
 				sortingComboBox.getSelectionModel().clearSelection();
-				searchTextField.clear();
+				initialRSearchTextField.clear();
+				finalRSearchTextField.clear();
 				
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Input a valid value", "Invalid Value", JOptionPane.PLAIN_MESSAGE, null);

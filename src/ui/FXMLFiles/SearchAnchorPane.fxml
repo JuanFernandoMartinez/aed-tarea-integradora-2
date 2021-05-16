@@ -19,12 +19,15 @@
                <VBox.margin>
                   <Insets bottom="30.0" />
                </VBox.margin></Label>
-            <HBox alignment="CENTER" fillHeight="false" spacing="30.0">
+            <HBox alignment="CENTER" fillHeight="false" spacing="17.0">
                <children>
-                  <TextField fx:id="searchTextField" focusTraversable="false" prefWidth="275.0" promptText="Type Something..." />
+                  <Label layoutX="268.0" layoutY="14.0" text="Initial value" />
+                  <TextField fx:id="initialRSearchTextField" focusTraversable="false" prefWidth="120.0" promptText="5" />
+                  <Label text="Final value" />
+                  <TextField fx:id="finalRSearchTextField" focusTraversable="false" layoutX="237.0" layoutY="10.0" prefWidth="120.0" promptText="20" />
                   <ComboBox fx:id="sortingComboBox" focusTraversable="false" prefWidth="175.0" promptText="Standard" />
                   <Button mnemonicParsing="false" onAction="#search" text="Search" />
-                  <Label text="Tiempo de busqueda:">
+                  <Label text="Search time:">
                      <HBox.margin>
                         <Insets left="200.0" />
                      </HBox.margin>
